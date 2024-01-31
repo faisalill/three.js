@@ -5,8 +5,6 @@
   import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
    import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
   import {onMount} from 'svelte';
-  // import * as gui from 'dat.gui';
-  // import { GUI } from 'dat.gui';
 
   let camera, scene, renderer, renderPass, composer, bloomPass;
   let geometry, material, mesh;
