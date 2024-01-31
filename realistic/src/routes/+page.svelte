@@ -13,13 +13,6 @@ onMount(()=>{
 
   scene = new THREE.Scene();
   camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
-  
-  // const geometry = new THREE.BoxGeometry( 1, 1, 1 );
-  // const material = new THREE.MeshBasicMaterial( { 
-  //   // wireframe: true,
-  //   color: 0x00ffff } );
-  // const cube = new THREE.Mesh( geometry, material );
-  // scene.add( cube );
 
   camera.position.x = 3;
   camera.position.y = 2;

@@ -1,10 +1,14 @@
 <script>
   import * as THREE from 'three';
   import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls.js';
+  import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
+  import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
+   import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
   import {onMount} from 'svelte';
   // import * as gui from 'dat.gui';
+  // import { GUI } from 'dat.gui';
 
-  let camera, scene, renderer;
+  let camera, scene, renderer, renderPass, composer, bloomPass;
   let geometry, material, mesh;
   let audioContext, sound;
 
@@ -16,6 +20,16 @@
     renderer = new THREE.WebGLRenderer();
     renderer.setSize( window.innerWidth, window.innerHeight );
     document.body.appendChild( renderer.domElement );
+
+    renderPass = new RenderPass( scene, camera );
+    composer = new EffectComposer( renderer );
+    composer.addPass( renderPass );
+
+    bloomPass = new UnrealBloomPass( new THREE.Vector2( window.innerWidth, window.innerHeight ), 0.8, 2, 0.1);
+    composer.addPass( bloomPass );
+
+    renderer.toneMapping = THREE.CineonToneMapping;
+    renderer.toneMappingExposure = 1;
 
     const uniforms = {
       u_frequency: { type: 'f', value: 0.0},
@@ -204,7 +218,8 @@
       uniforms.u_frequency.value = analyser.getAverageFrequency()
 
       controls.update();
-      renderer.render( scene, camera );
+      // renderer.render( scene, camera );
+      composer.render();
     }
 
     animate();
