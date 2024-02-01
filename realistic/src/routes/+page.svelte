@@ -37,7 +37,7 @@ onMount(()=>{
 
   renderer = new THREE.WebGLRenderer();
   renderer.setSize( window.innerWidth, window.innerHeight );
-  renderer.setClearColor( 0xffffff, 1 );
+  renderer.setClearColor( 0x000000, 1 );
   renderer.physicallyCorrectLights = true;
   renderer.outputEncoding = THREE.sRGBEncoding;
   renderer.gammaFactor = 0.2;
@@ -75,15 +75,15 @@ onMount(()=>{
 
   const rgbeLoader = new RGBELoader();
   rgbeLoader.load('/studio.hdr', function (texture) {
-    texture.mapping = THREE.EquirectangularReflectionMapping;
+    // texture.mapping = THREE.EquirectangularReflectionMapping;
     scene.environment = texture;
   })
 
-  const hemiLight = new THREE.HemisphereLight( 0xffffbb, 0x080820, 45 );
-  scene.add( hemiLight )
-
-  const ambientLight = new THREE.AmbientLight( 0xffffff, 10 );
-  scene.add( ambientLight );
+  // const hemiLight = new THREE.HemisphereLight( 0xffffbb, 0x080820, 45 );
+  // scene.add( hemiLight )
+  //
+  // const ambientLight = new THREE.AmbientLight( 0xffffff, 10 );
+  // scene.add( ambientLight );
 
   function animate() {
     requestAnimationFrame( animate );
