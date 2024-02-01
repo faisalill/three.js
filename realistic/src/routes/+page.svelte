@@ -38,9 +38,11 @@ onMount(()=>{
   renderer = new THREE.WebGLRenderer();
   renderer.setSize( window.innerWidth, window.innerHeight );
   renderer.setClearColor( 0xffffff, 1 );
+  renderer.physicallyCorrectLights = true;
   renderer.outputEncoding = THREE.sRGBEncoding;
-  renderer.toneMapping = THREE.CineonToneMapping;
-  renderer.toneMappingExposure = 1.5;
+  renderer.gammaFactor = 0.2;
+  // renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  // renderer.toneMappingExposure = 0.5;
   document.body.appendChild( renderer.domElement );
 
   const gridHelper = new THREE.GridHelper( 10, 10 );
@@ -57,9 +59,16 @@ onMount(()=>{
   dracoLoader.setDecoderPath( 'https://www.gstatic.com/draco/versioned/decoders/1.5.7/' );
   loader.setDRACOLoader( dracoLoader );
 
-  loader.load( '/porsche_compressed.glb', function ( gltf ) {
+  loader.load( '/blossom_box.glb', function ( gltf ) {
     model = gltf.scene;
     scene.add( model );
+    const middleColor = new THREE.Color('#000000')
+    let finalColor = new THREE.Color(colorstr)
+    finalColor = finalColor.convertSRGBToLinear()
+
+    model.traverse((node) => {
+        node.material.color.copy(middleColor).lerp(finalColor, op2)
+    })
   }, undefined, function ( error ) {
     console.error( error );
   } );
@@ -70,8 +79,11 @@ onMount(()=>{
     scene.environment = texture;
   })
 
-  const hemiLight = new THREE.HemisphereLight( 0xffffbb, 0x080820, 5 );
+  const hemiLight = new THREE.HemisphereLight( 0xffffbb, 0x080820, 45 );
   scene.add( hemiLight )
+
+  const ambientLight = new THREE.AmbientLight( 0xffffff, 10 );
+  scene.add( ambientLight );
 
   function animate() {
     requestAnimationFrame( animate );
