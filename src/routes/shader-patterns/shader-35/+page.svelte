@@ -27,9 +27,21 @@ onMount(() => {
     `,
     fragmentShader: `
       varying vec2 vUv;
+      #define PI 3.14159265359
       void main() {
-        float angle = atan(vUv.x, vUv.y);
-        gl_FragColor = vec4(vec3(angle), 1.0 );
+//         float angle = atan(vUv.x - 0.5, vUv.y - 0.5);
+//         angle = angle / PI * 2.0;
+//         angle = angle + 0.5;
+//
+//         float radius = 0.2 + sin(angle * 8.0) * 0.05;
+//         float strength = 1.0 - step(0.005, abs(distance(
+// vec2(vUv.x, vUv.y), vec2(0.5, 0.5)) - radius));
+
+        float angle = atan(vUv.x - 0.5, vUv.y - 0.5) / (PI * 2.0) + 0.5;
+        float radius = 0.25 + sin(angle * 100.0) * 0.02;
+        float strength = 1.0 - step(0.01, abs(distance(vUv, vec2(0.5)) - radius));
+
+        gl_FragColor = vec4(vec3(strength), 1.0 );
       }
     `,
     side: THREE.DoubleSide,

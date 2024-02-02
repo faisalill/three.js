@@ -27,8 +27,11 @@ onMount(() => {
     `,
     fragmentShader: `
       varying vec2 vUv;
+      #define PI 3.14159265359
       void main() {
-        float angle = atan(vUv.x, vUv.y);
+        float angle = atan(vUv.x - 0.5, vUv.y - 0.5);
+        angle = angle / (2.0 * PI);
+        angle = angle + 0.5;
         gl_FragColor = vec4(vec3(angle), 1.0 );
       }
     `,
