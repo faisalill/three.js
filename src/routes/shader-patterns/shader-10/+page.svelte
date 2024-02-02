@@ -28,8 +28,16 @@ onMount(() => {
     fragmentShader: `
       varying vec2 vUv;
       void main() {
-        float y = mod(vUv.y * 10.0, 1.0);
-        gl_FragColor = vec4(vec3(y), 1.0 );
+        // float color;
+        // if(vUv.x > 0.5 ) {
+        //   color =  vUv.x - 0.5;
+        // } else {
+        //   color = 0.5 - vUv.x;
+        // }
+        // 
+        // gl_FragColor = vec4( vec3(color), 1.0 );
+        float color = min(abs(0.5 - vUv.x),abs(0.5 - vUv.y)); 
+        gl_FragColor = vec4( vec3(color), 1.0 );
       }
     `,
   });

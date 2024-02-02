@@ -26,10 +26,20 @@ onMount(() => {
       }
     `,
     fragmentShader: `
+      float random (vec2 st) {
+          return fract(sin(dot(st.xy,
+                               vec2(12.9898,78.233)))*
+              43758.5453123);
+      }
+
       varying vec2 vUv;
       void main() {
-        float y = mod(vUv.y * 10.0, 1.0);
-        gl_FragColor = vec4(vec3(y), 1.0 );
+        vec2 gridUv = vec2(
+          floor(vUv.x * 10.0) ,
+          floor(vUv.y * 10.0 + vUv.x * 5.0) 
+        );
+        float color = random(gridUv);         
+        gl_FragColor = vec4(vec3(color), 1.0 );
       }
     `,
   });
