@@ -11,7 +11,7 @@ onMount(async() => {
   scene = new THREE.Scene();
 
   camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-  camera.position.z = 6.5;
+  camera.position.z = 8.5;
 
   renderer = new THREE.WebGLRenderer();
   renderer.setSize(window.innerWidth, window.innerHeight);
@@ -23,8 +23,8 @@ onMount(async() => {
     transparent: true,
     uniforms: {
       time: { value: 0 },
-      speed: { value: 2.0 },
-      hollows: { value: 20.0 },
+      speed: { value: 1.0 },
+      hollows: { value: 10.0 },
       thickness: { value: 94.0 }
     },
     vertexShader: `
@@ -38,10 +38,10 @@ onMount(async() => {
     fragmentShader: `
       vec3 palette( in float t )
       {
-          vec3 a = vec3( 0.5, 0.5, 0.5 );
+          vec3 a = vec3( 0.668, 0.668, 0.668 );
           vec3 b = vec3( 0.5, 0.5, 0.5 );
           vec3 c = vec3( 1.0, 1.0, 1.0 );
-          vec3 d = vec3( 0.263, 0.416, 0.557 );
+          vec3 d = vec3( 0.000, 0.333, 0.667 );
           return a + b*cos( 6.28318*(c*t+d) );
       }
       varying vec2 vUv;
@@ -51,20 +51,26 @@ onMount(async() => {
       uniform float thickness;
 
       void main() {
-        
-        vec2 newvUv = fract(vUv);
-        float variation = length(newvUv - 0.5);
-        
-        vec3 color1 = palette(length(vUv - 0.5) * 10.0 + time / 1.5);
+        vec2 uv = vUv;
+        vec2 uv0 = uv;
+        vec3 finalColor = vec3(0.0);
+    
+        for (float i = 0.0; i < 3.0; i++) {
 
-        variation = sin(variation * hollows + time * speed) / thickness;
-        variation = abs(variation);
-        variation = 1.0 - smoothstep(0.006,0.011, variation);
-        variation = 0.21 / variation;
+        uv = fract(uv * 2.0) - 0.5;
 
-        vec3 finalValue = vec3(color1 * vec3(variation));
+        float d = length(uv);
         
-        gl_FragColor = vec4(finalValue, 1.0);
+        vec3 col = palette(length(uv0 - 0.5) * 8.0 + time * 0.5 * speed + i * 2.0);
+  
+        d = sin(d * hollows  + time)/8.0;
+        d = abs(d);
+        d = pow(0.02/d, 1.2);
+        
+        finalColor += col * d;        
+        } 
+
+        gl_FragColor = vec4(finalColor, 1.0);
       }
     `
   })
@@ -72,8 +78,8 @@ onMount(async() => {
   const plane = new THREE.Mesh(geometry, material);
   scene.add(plane);
 
-  gui.add(material.uniforms.speed, 'value', 1, 100).name('Speed');
-  gui.add(material.uniforms.hollows, 'value', 10, 200).name('Hollows');
+  gui.add(material.uniforms.speed, 'value', 1, 10).name('Speed');
+  gui.add(material.uniforms.hollows, 'value', 6, 20).name('Hollows');
   gui.add(material.uniforms.thickness, 'value', 10, 200).name('Thickness');
 
   const controls = new OrbitControls(camera, renderer.domElement);
