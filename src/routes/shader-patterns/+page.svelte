@@ -36,13 +36,13 @@
 <!---->
 <!-- <a href="/shader-patterns/shader-13">Shader 13</a> -->
 <!-- <iframe src="/shader-patterns/shader-13" title="Shader 13"></iframe> -->
-<!---->
+
 <!-- <a href="/shader-patterns/shader-14">Shader 14</a> -->
 <!-- <iframe src="/shader-patterns/shader-14" title="Shader 14"></iframe> -->
 <!---->
 <!-- <a href="/shader-patterns/shader-15">Shader 15</a> -->
 <!-- <iframe src="/shader-patterns/shader-15" title="Shader 15"></iframe> -->
-
+<!---->
 <!-- <a href="/shader-patterns/shader-16">Shader 16</a> -->
 <!-- <iframe src="/shader-patterns/shader-16" title="Shader 16"></iframe> -->
 <!---->
@@ -54,12 +54,12 @@
 <!---->
 <!-- <a href="/shader-patterns/shader-19">Shader 19</a> -->
 <!-- <iframe src="/shader-patterns/shader-19" title="Shader 19"></iframe> -->
-
-<a href="/shader-patterns/shader-20">Shader 20</a>
-<iframe src="/shader-patterns/shader-20" title="Shader 20"></iframe>
-
-<a href="/shader-patterns/shader-21">Shader 21</a>
-<iframe src="/shader-patterns/shader-21" title="Shader 21"></iframe>
+<!---->
+<!-- <a href="/shader-patterns/shader-20">Shader 20</a> -->
+<!-- <iframe src="/shader-patterns/shader-20" title="Shader 20"></iframe> -->
+<!---->
+<!-- <a href="/shader-patterns/shader-21">Shader 21</a> -->
+<!-- <iframe src="/shader-patterns/shader-21" title="Shader 21"></iframe> -->
 
 <a href="/shader-patterns/shader-22">Shader 22</a>
 <iframe src="/shader-patterns/shader-22" title="Shader 22"></iframe>
