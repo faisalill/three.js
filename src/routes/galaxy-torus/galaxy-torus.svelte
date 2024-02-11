@@ -100,6 +100,7 @@
   useRender(() => {
     if(torusRef) {
       torusRef.rotation.z = Math.sin(torusMaterial.uniforms.time.value * 2.0 / 13.0)
+      torusRef.rotation.x = Math.sin(torusMaterial.uniforms.time.value * 2.0 / 13.0)
       torusMaterial.uniforms.time.value += 0.01
     }
 
