@@ -68,12 +68,12 @@ useFrame((_, delta)=> {
 </T.Mesh>
 {/await}
 
-<T.AmbientLight intensity={0.5} />
+<T.AmbientLight intensity={0.1} />
 <T.DirectionalLight position={[20, 0, 10]} intensity={0.5} />
 
 <T.Mesh bind:ref={icoRef} position={[30,0,0]}>
-  <T.IcosahedronGeometry args={[3, 0]} />
-  <T.MeshPhysicalMaterial 
+  <T.BoxGeometry args={[3, 3, 3]} />
+  <T.MeshPhongMaterial 
     bind:ref={icoMaterialRef}
     color='white'
     roughness={0.5}
