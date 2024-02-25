@@ -45,7 +45,9 @@ bind:ref={eyeCandyBackground}
     void main() { 
       vec2 newUv = vUv;
       vec3 color = vec3(1.0, 2.0, 3.0);
-      color = color * random(vUv * 0.1 + uTime * 0.1);
+      color.r = sin(uTime + vUv.x * 10.0) * 0.5 + 0.5;
+      color.g = cos(uTime + length(vUv) * 10.0) * 0.5 + 0.5;
+
       vec3 final = vec3(length(newUv - 0.5));
       final = 0.11 / final;
       final = smoothstep(0.25, 0.70, final);
