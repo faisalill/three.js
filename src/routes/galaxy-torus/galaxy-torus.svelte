@@ -14,10 +14,7 @@
   let torusGeometry = null
   let torusParams = {
     radius: 15,
-    tube: 10,
-    radialSegments: 16,
-    tubularSegments: 100,
-  };
+    tube: 10, radialSegments: 16, tubularSegments: 100, };
 
   let bloomParams = {
     resolution: new Vector2(window.innerWidth, window.innerHeight),
@@ -262,6 +259,10 @@
       uniform float time;
       void main() {
         vec3 color = vec3(1.0, 2.0, 3.0);
+        
+        color.r = sin(vUv.x * 10.0 + time);
+        color.g = sin(vUv.y * 10.0 + time);
+
         vec2 newUv = fract(vUv * 10.0);
         float variation = sin(vUv.x + time) ;
         variation = smoothstep(0.0, 1.0, variation);
