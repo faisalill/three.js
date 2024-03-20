@@ -5,7 +5,7 @@
   let shaderMaterialRef;
 
   useFrame((_, delta)=>{
-    shaderMaterialRef.uniforms.u_time.value += delta;
+    shaderMaterialRef.uniforms.uTime.value += delta;
   })
 </script>
 
@@ -18,7 +18,7 @@
   <T.ShaderMaterial 
     bind:ref={shaderMaterialRef}
     uniforms={{
-      u_time: { value: 0.0 }
+      uTime: { value: 0.0 }
     }}
     vertexShader={`
       varying vec2 vUv;
@@ -29,7 +29,7 @@
     `}
 
     fragmentShader={`
-      uniform float u_time;
+      uniform float uTime;
 
       mat2 rot2D(float a) {
           return mat2(cos(a), -sin(a), sin(a), cos(a));
@@ -61,7 +61,7 @@
       }
 
       float getDistance(vec3 p){
-        p.z += u_time * 0.5;
+        p.z += uTime * 0.5;
         p.y += 80.0;
         
         vec3 repeat = p;
